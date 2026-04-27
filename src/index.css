@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Arial Black", "Orbitron", sans-serif;
+  --font-body: "Helvetica Neue", "DM Sans", Helvetica, Arial, sans-serif;
+  --font-mono: "Courier New", "JetBrains Mono", Courier, monospace;
+
+  /* Brand Colors */
+  --color-brand-bg: #0A0A0F;
+  --color-brand-secondary: #0E0E1A;
+  --color-brand-card: #12121E;
+  --color-brand-cyan: #00F5FF;
+  --color-brand-lime: #AAFF00;
+  --color-brand-red: #FF2D55;
+  --color-brand-text: #F0F0FF;
+  --color-brand-muted: #8888AA;
+  --color-brand-border: rgba(255, 255, 255, 0.07);
+
+  /* Shadows */
+  --shadow-neon-cyan: 0 0 15px rgba(0, 245, 255, 0.3), 0 0 30px rgba(0, 245, 255, 0.1);
+  --shadow-neon-lime: 0 0 15px rgba(170, 255, 0, 0.3), 0 0 30px rgba(170, 255, 0, 0.1);
+  --shadow-neon-red: 0 0 15px rgba(255, 45, 85, 0.3), 0 0 30px rgba(255, 45, 85, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-text font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading uppercase tracking-tighter italic;
+  }
+
+  /* Keyboard Navigation Consistency */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-cyan ring-offset-2 ring-offset-brand-bg;
+  }
+}
+
+@layer utilities {
+  .text-glitch {
+    position: relative;
+    animation: glitch 5s infinite;
+    will-change: transform;
+  }
+
+  .scanline {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: 99;
+    pointer-events: none;
+    filter: contrast(150%) brightness(100%);
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    2% { transform: translate(-2px, 2px); }
+    4% { transform: translate(-2px, -2px); }
+    6% { transform: translate(2px, 2px); }
+    8% { transform: translate(2px, -2px); }
+    10% { transform: translate(0); }
+    100% { transform: translate(0); }
+  }
+
+  .animated-gradient-border {
+    position: relative;
+    border-radius: inherit;
+    will-change: transform;
+  }
+
+  .animated-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      45deg,
+      var(--color-brand-cyan),
+      var(--color-brand-lime),
+      var(--color-brand-red),
+      var(--color-brand-cyan)
+    );
+    background-size: 400% 400%;
+    z-index: -1;
+    border-radius: inherit;
+    animation: gradient-rotate 10s linear infinite;
+    will-change: background-position;
+  }
+
+  @keyframes gradient-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .scanline, .noise, .breaking-ticker, .nav-buttons, footer, .sidebar, .comments-section {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .article-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
