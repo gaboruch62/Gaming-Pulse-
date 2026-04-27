@@ -28,21 +28,18 @@ export const ArticlePage = ({ onNavigate }: { onNavigate: (page: string) => void
       <aside className="hidden xl:block col-span-3">
          <div className="sticky top-44 space-y-12">
             <section aria-labelledby="toc-heading">
-              <h4 id="toc-heading" className="text-[10px] font-mono font-black text-brand-cyan tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
-                <TableOfContents size={14} aria-hidden="true" /> Intel_Matrix
+              <h4 id="toc-heading" className="text-[12px] font-heading font-black text-brand-red tracking-[0.3em] uppercase mb-6 flex items-center gap-2">
+                <TableOfContents size={14} aria-hidden="true" /> MISSION_LOG
               </h4>
-              <ul className="space-y-4 font-mono text-[10px] uppercase font-bold text-brand-muted tracking-widest" role="list">
+              <ul className="space-y-4 font-heading text-lg uppercase font-bold text-black tracking-widest" role="list">
                 <li role="listitem">
-                  <button aria-label="Skip to section: The Announcement" className="hover:text-brand-lime cursor-pointer transition-colors border-l-2 border-brand-lime pl-3 text-left uppercase w-full">01. The_Announcement</button>
+                  <button aria-label="Skip to section" className="hover:text-brand-red cursor-pointer transition-colors border-l-4 border-brand-red pl-3 text-left uppercase w-full bg-white px-2 py-1 shadow-comic-sm">01_THE_DROP</button>
                 </li>
                 <li role="listitem">
-                  <button aria-label="Skip to section: Platform Breakdown" className="hover:text-brand-lime cursor-pointer transition-colors border-l-2 border-transparent pl-3 text-left uppercase w-full">02. Platform_Breakdown</button>
+                  <button aria-label="Skip to section" className="hover:text-brand-red cursor-pointer transition-colors border-l-4 border-black pl-3 text-left uppercase w-full bg-white px-2 py-1 shadow-comic-sm">02_PLATFORMS</button>
                 </li>
                 <li role="listitem">
-                  <button aria-label="Skip to section: World Scale" className="hover:text-brand-lime cursor-pointer transition-colors border-l-2 border-transparent pl-3 text-left uppercase w-full">03. World_Scale</button>
-                </li>
-                <li role="listitem">
-                  <button aria-label="Skip to section: Verdict" className="hover:text-brand-lime cursor-pointer transition-colors border-l-2 border-transparent pl-3 text-left uppercase w-full">04. Verdict</button>
+                  <button aria-label="Skip to section" className="hover:text-brand-red cursor-pointer transition-colors border-l-4 border-black pl-3 text-left uppercase w-full bg-white px-2 py-1 shadow-comic-sm">03_WORLD_MAP</button>
                 </li>
               </ul>
             </section>
@@ -196,32 +193,26 @@ export const ArticlePage = ({ onNavigate }: { onNavigate: (page: string) => void
         </div>
 
         {/* 6. PULSE VERDICT BOX */}
-        <section className="bg-brand-secondary border border-brand-cyan/20 p-6 md:p-8 shadow-2xl relative overflow-hidden group">
-           <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity hidden md:block">
-              <Zap size={120} className="text-brand-cyan" />
-           </div>
-           <h2 className="text-2xl md:text-3xl font-black italic font-heading text-brand-cyan mb-6">THE_PULSE_VERDICT</h2>
-           <p className="text-sm text-brand-text/80 leading-relaxed mb-8 italic">
-              Rockstar isn't just selling a game; they're selling a vision of the mid-2020s simulation frontier. If the internal benchmarks hold true, GTA VI will be the definitive software event of the decade.
+        <section className="bg-white border-8 border-black p-8 md:p-12 shadow-comic relative overflow-hidden group rotate-[1deg]">
+           <div className="absolute inset-0 halftone opacity-10"></div>
+           <h2 className="text-5xl md:text-7xl font-black italic font-heading text-brand-red mb-8 tracking-tighter drop-shadow-[3px_3px_0px_#000]">THE FINAL VERDICT!</h2>
+           <p className="text-xl text-black font-heading leading-tight mb-8 italic uppercase max-w-2xl">
+              Rockstar isn't just selling a game; they're selling a vision of the mid-2020s simulation frontier! if the intel holds true, this will be the event of the century!
            </p>
            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-0">
               <div className="flex flex-col md:flex-row md:items-center gap-6">
-                 <PulseScore score={94} size="md" />
+                 <PulseScore score={94} size="lg" />
                  <div>
-                    <h5 className="text-[10px] font-mono font-black text-brand-muted uppercase tracking-[0.2em] mb-3">Was this intel useful?</h5>
-                    <div className="flex flex-wrap gap-2">
-                       <button className="flex items-center gap-2 px-4 py-3 bg-brand-bg border border-white/10 text-[10px] font-mono font-bold hover:border-brand-lime hover:text-brand-lime transition-all min-h-[44px]">
-                          <ThumbsUp size={14} /> AFFIRMATIVE
+                    <h5 className="text-[12px] font-heading font-black text-black uppercase tracking-widest mb-3">ENJOYED THIS ISSUE?</h5>
+                    <div className="flex flex-wrap gap-4">
+                       <button className="comic-btn bg-brand-lime text-black py-4">
+                          HELL_YEAH!
                        </button>
-                       <button className="flex items-center gap-2 px-4 py-3 bg-brand-bg border border-white/10 text-[10px] font-mono font-bold hover:border-brand-red hover:text-brand-red transition-all min-h-[44px]">
-                          <ThumbsDown size={14} /> NEGATIVE
+                       <button className="comic-btn bg-brand-red text-white py-4">
+                          NOPE!
                        </button>
                     </div>
                  </div>
-              </div>
-              <div className="text-right border-t border-white/5 pt-6 md:border-t-0 md:pt-0">
-                 <div className="text-xl md:text-[24px] font-black italic tracking-tighter text-brand-lime">LEVEL_5_CLEARANCE</div>
-                 <div className="text-[9px] font-mono font-bold text-brand-muted uppercase tracking-widest">HIVE_MIND_APPROVED</div>
               </div>
            </div>
         </section>

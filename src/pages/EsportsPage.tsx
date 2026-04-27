@@ -34,48 +34,37 @@ const LiveMatchCard: React.FC<{ match: any }> = ({ match }) => {
     <motion.div 
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className={`bg-brand-card border ${match.status === 'LIVE' ? 'border-brand-red shadow-neon-red ring-1 ring-brand-red/20' : 'border-brand-border'} p-4 relative group cursor-pointer hover:border-brand-cyan transition-all`}
+      className={`bg-white border-4 ${match.status === 'LIVE' ? 'border-brand-red shadow-comic-red lg:scale-105' : 'border-black shadow-comic'} p-6 relative group cursor-pointer hover:rotate-1 transition-all`}
     >
       {match.status === 'LIVE' && (
-        <div className="absolute -top-2 left-4 px-2 py-0.5 bg-brand-red text-white text-[8px] font-black uppercase flex items-center gap-1 animate-pulse z-10">
-          <div className="w-1 h-1 bg-white rounded-full"></div> LIVE
+        <div className="absolute -top-3 left-6 px-3 py-1 bg-brand-red text-white text-[12px] font-heading font-black uppercase flex items-center gap-2 border-2 border-black z-10">
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div> LIVE_COMBAT!
         </div>
       )}
       
-      <div className="flex justify-between items-center mb-4">
-        <span className="text-[9px] font-mono font-black text-brand-muted uppercase tracking-widest">{match.tournament}</span>
+      <div className="flex justify-between items-center mb-6">
         <Tag type={match.status === 'LIVE' ? 'breaking' : 'intel'}>{match.game}</Tag>
       </div>
 
       <div className="flex items-center justify-between gap-4 py-4">
         <div className="flex flex-col items-center gap-2 flex-1">
-          <div className="w-10 h-10 bg-brand-secondary border border-white/5 rounded-sm flex items-center justify-center grayscale group-hover:grayscale-0 transition-all">
-            <Users size={20} className="text-brand-muted" />
-          </div>
-          <span className="text-[10px] font-black uppercase text-center">{match.teamA}</span>
+           <div className="text-lg font-heading font-black uppercase text-center text-black leading-none">{match.teamA}</div>
         </div>
 
-        <div className="flex flex-col items-center justify-center">
-           <div className={`text-2xl font-black italic tracking-tighter ${match.status === 'LIVE' ? 'text-brand-red' : 'text-brand-text'}`}>
-             {scoreA} : {scoreB}
+        <div className="flex flex-col items-center justify-center p-4 bg-zinc-100 border-2 border-black rotate-[-3deg]">
+           <div className={`text-4xl font-heading font-black italic tracking-tighter ${match.status === 'LIVE' ? 'text-brand-red' : 'text-black'}`}>
+             {scoreA}:{scoreB}
            </div>
-           <span className="text-[8px] font-mono font-bold text-brand-muted uppercase">SCORE</span>
         </div>
 
         <div className="flex flex-col items-center gap-2 flex-1 text-right">
-          <div className="w-10 h-10 bg-brand-secondary border border-white/5 rounded-sm flex items-center justify-center grayscale group-hover:grayscale-0 transition-all">
-            <Users size={20} className="text-brand-muted" />
-          </div>
-          <span className="text-[10px] font-black uppercase text-center">{match.teamB}</span>
+           <div className="text-lg font-heading font-black uppercase text-center text-black leading-none">{match.teamB}</div>
         </div>
       </div>
 
-      <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-[8px] font-mono text-brand-muted uppercase">
-           <Clock size={10} /> {match.status === 'LIVE' ? 'WATCHING NOW' : match.time}
-        </div>
-        <button className="text-brand-cyan hover:translate-x-1 transition-transform">
-           <ArrowRight size={14} />
+      <div className="mt-6 pt-6 border-t-2 border-black flex items-center justify-between">
+        <button className="comic-btn bg-brand-cyan p-2">
+           <Tv size={20} className="text-black" />
         </button>
       </div>
     </motion.div>
@@ -104,37 +93,35 @@ export const EsportsPage = ({ onNavigate }: { onNavigate: (page: string) => void
   return (
     <main className="mt-20 md:mt-32 overflow-hidden">
       {/* HERO SECTION */}
-      <section className="relative py-20 bg-brand-bg border-b border-brand-border overflow-hidden">
-        <div className="absolute inset-0 scanline opacity-30 pointer-events-none"></div>
-        <div className="max-w-[1600px] mx-auto px-6 relative z-10">
-          <div className="flex flex-col items-center text-center">
-             <div className="flex items-center gap-3 mb-6 px-4 py-1 bg-brand-red/10 border border-brand-red/30 text-brand-red font-mono text-[10px] font-black uppercase tracking-[0.3em] animate-pulse">
-                <Flame size={12} fill="currentColor" /> LIVE_NOW_TRANSMISSION
+      <section className="relative py-24 md:py-40 bg-brand-red border-b-8 border-black shadow-[0_10px_0_rgba(0,0,0,1)] overflow-hidden">
+        <div className="absolute inset-0 halftone opacity-20 pointer-events-none"></div>
+        <div className="max-w-[1600px] mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+             <div className="flex items-center gap-3 mb-6 px-4 py-2 bg-white border-2 border-black text-brand-red font-heading text-lg font-black uppercase tracking-widest rotate-[-1deg]">
+                <Flame size={20} fill="currentColor" /> LIVE_SIGNAL!
              </div>
-             <h1 className="text-6xl md:text-[140px] font-black italic tracking-tighter leading-[0.8] mb-8 animate-glitch" data-text="ESPORTS">
-               ESPORTS
+             <h1 className="text-[clamp(60px,15vw,160px)] font-black italic tracking-wider leading-[0.8] mb-8 text-white drop-shadow-[8px_8px_0px_#000]">
+               ESPORTS!
              </h1>
-             <p className="text-lg md:text-xl font-black italic text-brand-text/70 uppercase tracking-tighter max-w-2xl">
-               Tournaments. Results. Standings. <span className="text-brand-cyan">All live.</span>
+             <p className="text-2xl md:text-4xl font-heading font-black italic text-white mb-12 uppercase tracking-tighter drop-shadow-[2px_2px_0px_#000]">
+               Tournaments. Results. Standings. <span className="text-brand-lime">ALL LIVE!</span>
              </p>
-          </div>
         </div>
       </section>
 
       {/* LIVE SCORES TICKER */}
-      <div className="h-10 bg-brand-secondary text-white overflow-hidden flex items-center whitespace-nowrap z-20 border-b border-brand-border relative cursor-default select-none">
-        <div className="absolute left-0 h-full bg-brand-bg px-6 z-10 flex items-center font-black italic font-heading text-xs shadow-xl border-r border-brand-border">
-          LIVE_SIGNAL
+      <div className="h-12 bg-white text-black overflow-hidden flex items-center whitespace-nowrap z-20 border-b-4 border-black relative cursor-default select-none">
+        <div className="absolute left-0 h-full bg-brand-red px-6 z-10 flex items-center font-black italic font-heading text-lg shadow-[4px_0_0_#000] border-r-4 border-black text-white">
+          LIVE_FEED
         </div>
         <motion.div 
           animate={{ x: [0, -2000] }}
           transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          className="flex gap-20 font-mono text-[10px] font-black uppercase tracking-widest ml-40"
+          className="flex gap-20 font-heading text-xl font-black uppercase tracking-widest ml-40"
         >
           {liveMatches.map((m, i) => (
-            <span key={i} className="flex items-center gap-4 text-brand-muted">
-              {m.game} <span className="text-white">{m.teamA} {m.scoreA} : {m.scoreB} {m.teamB}</span>
-              <span className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse"></span>
+            <span key={i} className="flex items-center gap-4 text-black italic">
+              {m.game} <span className="text-brand-red underline">{m.teamA} {m.scoreA} : {m.scoreB} {m.teamB}</span>
+              <span className="w-2 h-2 bg-brand-red border border-black rounded-full animate-pulse"></span>
             </span>
           ))}
         </motion.div>

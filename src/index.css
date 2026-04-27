@@ -1,40 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-heading: "Arial Black", "Orbitron", sans-serif;
-  --font-body: "Helvetica Neue", "DM Sans", Helvetica, Arial, sans-serif;
-  --font-mono: "Courier New", "JetBrains Mono", Courier, monospace;
+  --font-heading: "Bangers", system-ui, sans-serif;
+  --font-title: "Anton", system-ui, sans-serif;
+  --font-body: "DM Sans", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-  /* Brand Colors */
-  --color-brand-bg: #0A0A0F;
-  --color-brand-secondary: #0E0E1A;
-  --color-brand-card: #12121E;
-  --color-brand-cyan: #00F5FF;
-  --color-brand-lime: #AAFF00;
-  --color-brand-red: #FF2D55;
-  --color-brand-text: #F0F0FF;
-  --color-brand-muted: #8888AA;
-  --color-brand-border: rgba(255, 255, 255, 0.07);
+  /* Marvel Brand Colors */
+  --color-brand-bg: #111111;
+  --color-brand-secondary: #1a1a1a;
+  --color-brand-card: #222222;
+  --color-brand-cyan: #2FAADF; /* Blue Hero */
+  --color-brand-lime: #FFDE00; /* Yellow Power */
+  --color-brand-red: #EE1D23;  /* Marvel Red */
+  --color-brand-text: #FFFFFF;
+  --color-brand-muted: #999999;
+  --color-brand-border: #000000;
 
   /* Shadows */
-  --shadow-neon-cyan: 0 0 15px rgba(0, 245, 255, 0.3), 0 0 30px rgba(0, 245, 255, 0.1);
-  --shadow-neon-lime: 0 0 15px rgba(170, 255, 0, 0.3), 0 0 30px rgba(170, 255, 0, 0.1);
-  --shadow-neon-red: 0 0 15px rgba(255, 45, 85, 0.3), 0 0 30px rgba(255, 45, 85, 0.1);
+  --shadow-comic: 6px 6px 0px #000000;
+  --shadow-comic-sm: 3px 3px 0px #000000;
+  --shadow-comic-red: 6px 6px 0px #EE1D23;
 }
 
 @layer base {
   body {
     @apply bg-brand-bg text-brand-text font-body antialiased;
+    background-image: 
+      radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading uppercase tracking-tighter italic;
+    @apply font-heading uppercase tracking-wider italic;
+  }
+
+  /* Marvel Button Style */
+  .comic-btn {
+    @apply relative border-4 border-black font-heading tracking-widest px-6 py-2 transition-all duration-75 active:translate-x-1 active:translate-y-1 active:shadow-none;
+    box-shadow: 6px 6px 0px #000000;
+  }
+
+  /* Half-tone Overlay */
+  .halftone {
+    background-image: radial-gradient(rgba(0,0,0,0.4) 10%, transparent 11%);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+  }
+
+  .parallax-comic-bg {
+    background-image: 
+      linear-gradient(rgba(17, 17, 17, 0.9), rgba(17, 17, 17, 0.9)),
+      url('https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?q=80&w=2574&auto=format&fit=crop');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+  }
+
+  .vignette-overlay {
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
+    pointer-events: none;
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-gradient {
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  .pop-out-container:hover .pop-out-image {
+    transform: scale(1.3) translateY(-10px);
+    z-index: 50;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Marvel Pop effect */
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  .animate-pop {
+    animation: pop 0.4s ease-out;
   }
 
   /* Keyboard Navigation Consistency */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-cyan ring-offset-2 ring-offset-brand-bg;
+    @apply outline-none ring-4 ring-brand-red ring-offset-2 ring-offset-brand-bg;
   }
 }
 

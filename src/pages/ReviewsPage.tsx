@@ -39,55 +39,42 @@ const ReviewCard: React.FC<{ review: any, index: number }> = ({ review, index })
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="group bg-brand-card border border-brand-border hover:border-brand-cyan hover:shadow-neon-cyan transition-all duration-500 flex flex-col relative overflow-hidden"
+      className="group bg-white border-4 border-black hover:-translate-y-2 hover:shadow-[10px_10px_0px_#EE1D23] transition-all duration-500 flex flex-col relative overflow-hidden shadow-comic"
     >
-      <div className={`aspect-video w-full relative overflow-hidden bg-gradient-to-br ${review.color}`}>
-        <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <Gamepad2 size={120} className="text-white" />
-        </div>
+      <div className={`aspect-video w-full relative overflow-hidden bg-gradient-to-br ${review.color} border-b-4 border-black`}>
+        <div className="absolute inset-0 halftone opacity-20"></div>
         <div className="absolute top-4 left-4 flex flex-wrap gap-2">
           {review.platforms.map((p: string) => (
              <PlatformBadge key={p} platform={p} />
           ))}
         </div>
-        <div className="absolute top-4 right-4 group-hover:scale-110 transition-transform duration-500">
+        <div className="absolute top-4 right-4 group-hover:scale-110 transition-transform duration-500 p-1 bg-white border-2 border-black rotate-[-3deg]">
            <PulseScore score={review.score} size="sm" />
         </div>
-        {/* Animated Score Bar on Hover */}
-        <div className="absolute bottom-0 left-0 h-1 bg-brand-cyan transition-all duration-700 ease-out w-0 group-hover:w-full"></div>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-6 flex-1 flex flex-col bg-white">
         <div className="flex items-center gap-2 mb-3">
           <Tag type="intel">{review.genre}</Tag>
-          <span className={`text-[9px] font-mono font-black py-0.5 px-2 rounded-sm ${getVerdictColor(review.verdict)}`}>
-            {review.verdict}
+          <span className={`text-[12px] font-heading font-black italic py-1 px-4 border-2 border-black rotate-3 ${getVerdictColor(review.verdict)} text-black`}>
+            {review.verdict}!
           </span>
         </div>
         
-        <h3 className="text-xl font-black italic mb-2 tracking-tighter group-hover:text-brand-cyan transition-colors">
+        <h3 className="text-3xl font-heading font-black italic mb-2 tracking-tighter group-hover:text-brand-red transition-colors text-black leading-none uppercase">
           {review.title}
         </h3>
-        <p className="text-[10px] font-mono font-bold text-brand-muted uppercase mb-4">
-          Developed by <span className="text-brand-text">{review.developer}</span>
-        </p>
 
-        <p className="text-xs text-brand-text/70 italic leading-relaxed mb-6 line-clamp-2">
+        <p className="text-sm text-black font-bold italic leading-tight mb-6 line-clamp-2 uppercase">
           "{review.quote}"
         </p>
 
-        <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+        <div className="mt-auto pt-6 border-t-2 border-black flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-brand-bg border border-brand-border flex items-center justify-center overflow-hidden">
-               <User size={14} className="text-brand-muted" />
-            </div>
-            <div>
-              <div className="text-[9px] font-black italic">{review.author}</div>
-              <div className="text-[8px] font-mono font-bold text-brand-muted">{review.date}</div>
-            </div>
+            <div className="text-sm font-heading font-black italic text-black uppercase">{review.author}</div>
           </div>
-          <button className="text-brand-cyan hover:translate-x-1 transition-transform">
-            <ArrowRight size={18} />
+          <button className="comic-btn bg-brand-lime p-2">
+            <ArrowRight size={18} className="text-black" />
           </button>
         </div>
       </div>
@@ -117,35 +104,31 @@ export const ReviewsPage = ({ onNavigate }: { onNavigate: (page: string) => void
   return (
     <main className="mt-20 md:mt-32 overflow-hidden">
       {/* PAGE HERO */}
-      <section className="relative py-20 md:py-32 bg-brand-bg overflow-hidden">
-        <div className="absolute inset-0 bg-brand-secondary opacity-50 scanline pointer-events-none"></div>
+      <section className="relative py-24 md:py-40 bg-brand-red border-b-8 border-black shadow-[0_10px_0_rgba(0,0,0,1)] overflow-hidden">
+        <div className="absolute inset-0 halftone opacity-20 pointer-events-none"></div>
         <div className="max-w-[1600px] mx-auto px-6 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-block px-4 py-1 bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan font-mono text-[10px] font-black uppercase tracking-[0.3em] mb-8"
+            className="inline-block px-4 py-2 bg-white border-2 border-black text-brand-red font-heading text-lg font-black uppercase tracking-widest mb-8 rotate-[-1deg]"
           >
-            FIELD_INTELLIGENCE_REPORTS
+            FIELD_REPORTS!
           </motion.div>
-          <h1 className="text-6xl md:text-[120px] font-black italic tracking-tighter leading-[0.8] mb-8 animate-glitch">
-            REVIEWS
+          <h1 className="text-[clamp(60px,15vw,160px)] font-black italic tracking-wider leading-[0.8] mb-8 text-white drop-shadow-[8px_8px_0px_#000]">
+            REVIEWS!
           </h1>
-          <p className="text-xl md:text-2xl font-black italic text-brand-text/70 mb-12 uppercase tracking-tighter">
-            Honest scores. <span className="text-brand-cyan">Zero sponsored opinions.</span>
+          <p className="text-2xl md:text-4xl font-heading font-black italic text-white mb-12 uppercase tracking-tighter drop-shadow-[2px_2px_0px_#000]">
+            Honest scores. <span className="text-brand-lime">Zero sponsored opinions!</span>
           </p>
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20 border-y border-white/5 py-10">
-             <div className="text-center">
-                <div className="text-4xl font-black italic text-brand-cyan mb-1">2,847</div>
-                <div className="text-[10px] font-mono font-black text-brand-muted uppercase tracking-widest">REVIEWS_LOGGED</div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-20 py-10">
+             <div className="text-center p-6 bg-white border-4 border-black shadow-comic rotate-[-2deg]">
+                <div className="text-5xl font-heading font-black italic text-brand-red mb-1">2,847</div>
+                <div className="text-xs font-heading font-black text-black uppercase tracking-widest">REVIEWS_LOGGED!</div>
              </div>
-             <div className="text-center">
-                <div className="text-4xl font-black italic text-brand-lime mb-1">94.2%</div>
-                <div className="text-[10px] font-mono font-black text-brand-muted uppercase tracking-widest">ACCURACY_RATING</div>
-             </div>
-             <div className="text-center">
-                <div className="text-4xl font-black italic text-brand-red mb-1">112</div>
-                <div className="text-[10px] font-mono font-black text-brand-muted uppercase tracking-widest">GAMES_SKIPPED</div>
+             <div className="text-center p-6 bg-white border-4 border-black shadow-comic rotate-[1deg]">
+                <div className="text-5xl font-heading font-black italic text-brand-lime mb-1">94.2%</div>
+                <div className="text-xs font-heading font-black text-black uppercase tracking-widest">ACCURACY!</div>
              </div>
           </div>
         </div>
@@ -285,50 +268,36 @@ export const ReviewsPage = ({ onNavigate }: { onNavigate: (page: string) => void
         </section>
 
         {/* SCORE EXPLAINER */}
-        <section className="bg-brand-secondary/50 border border-brand-border p-10 mb-24 relative overflow-hidden">
-           <div className="absolute top-0 right-0 p-10 opacity-5">
-              <Star size={120} className="text-white" />
-           </div>
-           <div className="max-w-4xl">
-              <h2 className="text-3xl font-black italic mb-8 flex items-center gap-3">
-                <Zap className="text-brand-cyan" /> HOW WE SCORE
+        <section className="bg-white border-8 border-black p-10 mb-24 relative overflow-hidden rotate-[-1deg] shadow-comic">
+           <div className="absolute inset-0 halftone opacity-10 pointer-events-none"></div>
+           <div className="max-w-4xl relative z-10">
+              <h2 className="text-5xl font-black italic font-heading text-black mb-10 flex items-center gap-4">
+                <Zap size={40} className="text-brand-red fill-current" /> HOW_WE_SCORE!
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-                 <div className="space-y-3">
+                 <div className="space-y-4 p-4 border-4 border-black bg-brand-lime shadow-comic-sm">
                     <div className="flex items-center gap-3">
-                       <div className="w-3 h-3 bg-brand-lime rounded-full" />
-                       <span className="text-xs font-black italic tracking-widest">80 - 100</span>
+                       <span className="text-3xl font-heading font-black italic text-black tracking-widest">80-100</span>
                     </div>
-                    <p className="text-[10px] text-brand-muted leading-relaxed uppercase font-bold">
-                       Essential intel. High tactical value. Masterpieces that define their genre.
+                    <p className="text-lg font-heading font-black text-black leading-none uppercase italic">
+                       MASTERPIECE! DEFINES THE GENRE!
                     </p>
                  </div>
-                 <div className="space-y-3">
+                 <div className="space-y-4 p-4 border-4 border-black bg-brand-cyan shadow-comic-sm">
                     <div className="flex items-center gap-3">
-                       <div className="w-3 h-3 bg-yellow-400 rounded-full" />
-                       <span className="text-xs font-black italic tracking-widest">60 - 79</span>
+                       <span className="text-3xl font-heading font-black italic text-black tracking-widest">60-79</span>
                     </div>
-                    <p className="text-[10px] text-brand-muted leading-relaxed uppercase font-bold">
-                       Solid equipment. Performs as expected but lacks the cutting-edge refinement.
+                    <p className="text-lg font-heading font-black text-black leading-none uppercase italic">
+                       SOLID EFFORT! WORTH A PLAY!
                     </p>
                  </div>
-                 <div className="space-y-3">
+                 <div className="space-y-4 p-4 border-4 border-black bg-brand-red shadow-comic-sm">
                     <div className="flex items-center gap-3">
-                       <div className="w-3 h-3 bg-brand-red rounded-full" />
-                       <span className="text-xs font-black italic tracking-widest">BELOW 60</span>
+                       <span className="text-3xl font-heading font-black italic text-white tracking-widest">0-59</span>
                     </div>
-                    <p className="text-[10px] text-brand-muted leading-relaxed uppercase font-bold">
-                       Critical failure. Avoid deployment. Poorly optimized or fundamentally broken.
+                    <p className="text-lg font-heading font-black text-white leading-none uppercase italic">
+                       CRITICAL FAILURE! SKIP IT!!
                     </p>
-                 </div>
-              </div>
-              <div className="mt-12 pt-8 border-t border-white/5 flex items-center gap-6">
-                 <div className="w-12 h-12 bg-white flex items-center justify-center shrink-0 shadow-neon-white">
-                    <ShieldCheck className="text-brand-bg" size={24} />
-                 </div>
-                 <div className="space-y-1">
-                    <h4 className="text-sm font-black italic">OUR_REVIEWS_ARE_NEVER_SPONSORED</h4>
-                    <p className="text-[10px] font-mono font-bold text-brand-muted uppercase tracking-widest">INTEGRITY_INDEX: 100% // NO ADS // OWNED BY THE COMMUNITY</p>
                  </div>
               </div>
            </div>

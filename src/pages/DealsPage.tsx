@@ -47,12 +47,12 @@ const Countdown = ({ targetTime }: { targetTime?: number }) => {
   }, [targetTime]);
 
   return (
-    <div className="flex gap-2 font-mono text-2xl font-black italic">
-      <div className="bg-brand-secondary border border-white/10 px-2 py-1">{timeLeft.h}</div>
-      <div className="py-1">:</div>
-      <div className="bg-brand-secondary border border-white/10 px-2 py-1">{timeLeft.m}</div>
-      <div className="py-1">:</div>
-      <div className="bg-brand-secondary border border-white/10 px-2 py-1 text-brand-lime">{timeLeft.s}</div>
+    <div className="flex gap-2 font-heading text-3xl font-black italic">
+      <div className="bg-white border-2 border-black px-3 py-1 text-black shadow-comic-sm">{timeLeft.h}</div>
+      <div className="py-1 text-white drop-shadow-[2px_2px_0px_#000]">:</div>
+      <div className="bg-white border-2 border-black px-3 py-1 text-black shadow-comic-sm">{timeLeft.m}</div>
+      <div className="py-1 text-white drop-shadow-[2px_2px_0px_#000]">:</div>
+      <div className="bg-brand-red border-2 border-black px-3 py-1 text-white shadow-comic-sm">{timeLeft.s}</div>
     </div>
   );
 };
@@ -71,48 +71,32 @@ const DealCard: React.FC<{ deal: any }> = ({ deal }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-brand-card border border-brand-border hover:border-brand-cyan hover:shadow-neon-cyan transition-all duration-300 flex flex-col group"
+      className="bg-white border-4 border-black hover:-translate-y-2 hover:shadow-[10px_10px_0px_#EE1D23] transition-all duration-300 flex flex-col group shadow-comic"
     >
-      <div className={`aspect-square relative overflow-hidden bg-gradient-to-br ${deal.color}`}>
-        <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <Gamepad2 size={100} className="text-white" />
-        </div>
+      <div className={`aspect-square relative overflow-hidden bg-gradient-to-br ${deal.color} border-b-4 border-black`}>
+        <div className="absolute inset-0 halftone opacity-30"></div>
         <div className="absolute top-2 left-2">
            <PlatformBadge platform={deal.platform} />
         </div>
-        <div className={`absolute top-2 right-2 px-2 py-1 font-heading italic font-black text-xs ${getDiscountColor(deal.discount)}`}>
-           {deal.discount}% OFF
-        </div>
-        <div className="absolute bottom-2 right-2 opacity-50 text-[8px] font-mono font-black text-white uppercase tracking-widest">
-           {deal.store}
+        <div className={`absolute top-2 right-2 px-2 py-1 font-heading italic font-extrabold text-lg border-2 border-black rotate-3 ${getDiscountColor(deal.discount)}`}>
+           {deal.discount}% OFF!
         </div>
       </div>
 
       <div className="p-4 flex-1 flex flex-col">
-        <div className="flex items-center gap-1 mb-2">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={10} className={i < deal.rating ? 'fill-brand-lime text-brand-lime' : 'text-brand-muted'} />
-          ))}
-        </div>
-        <h3 className="text-sm font-black uppercase mb-4 leading-tight group-hover:text-brand-cyan transition-colors line-clamp-1">
+        <h3 className="text-2xl font-heading font-black italic uppercase mb-4 leading-[0.8] group-hover:text-brand-red transition-colors text-black">
           {deal.title}
         </h3>
         
         <div className="mt-auto">
-          <div className="flex items-baseline gap-2 mb-4">
-             <span className="text-lg font-black italic text-brand-lime">${deal.salePrice}</span>
-             <span className="text-xs text-brand-muted line-through">${deal.originalPrice}</span>
+          <div className="flex items-baseline gap-2 mb-4 bg-zinc-100 p-2 border-2 border-black rotate-[-1deg]">
+             <span className="text-2xl font-heading font-black italic text-brand-red">${deal.salePrice}</span>
+             <span className="text-sm text-black/40 line-through font-bold">${deal.originalPrice}</span>
           </div>
           
           <div className="flex gap-2">
-            <button className="flex-1 bg-brand-bg border border-white/10 hover:border-brand-lime hover:text-brand-lime p-2 text-[10px] font-black uppercase italic tracking-widest transition-all">
-               GET DEAL
-            </button>
-            <button 
-              onClick={(e) => { e.stopPropagation(); setAlerted(!alerted); }}
-              className={`p-2 border transition-all ${alerted ? 'bg-brand-lime border-brand-lime text-brand-bg' : 'border-white/10 text-brand-muted hover:text-white'}`}
-            >
-               {alerted ? <BellOff size={14} /> : <Bell size={14} />}
+            <button className="flex-1 comic-btn bg-brand-red text-white py-3 text-lg">
+               GET IT!
             </button>
           </div>
         </div>
@@ -154,28 +138,24 @@ export const DealsPage = ({ onNavigate }: { onNavigate: (page: string) => void }
   return (
     <main className="mt-20 md:mt-32 overflow-hidden">
       {/* HERO SECTION */}
-      <section className="relative py-20 bg-brand-bg border-b border-brand-border overflow-hidden">
-        <div className="absolute inset-0 scanline opacity-30 pointer-events-none"></div>
+      <section className="relative py-24 bg-brand-red border-b-8 border-black shadow-[0_10px_0_rgba(0,0,0,1)] overflow-hidden">
+        <div className="absolute inset-0 halftone opacity-20 pointer-events-none"></div>
         <div className="max-w-[1600px] mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="text-center md:text-left">
-             <div className="inline-flex items-center gap-2 mb-6 px-4 py-1 bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan font-mono text-[10px] font-black uppercase tracking-[0.3em]">
-                <Zap size={12} fill="currentColor" /> MARKET_RADAR_ACTIVE
+             <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-white border-2 border-black text-brand-red font-heading text-lg font-black uppercase tracking-widest rotate-[-1deg]">
+                <Zap size={20} fill="currentColor" /> MARKET_ACTIVE!
              </div>
-             <h1 className="text-6xl md:text-[140px] font-black italic tracking-tighter leading-[0.8] mb-8 animate-glitch" data-text="DEALS">
-               DEALS
+             <h1 className="text-[clamp(60px,15vw,160px)] font-black italic tracking-wider leading-[0.8] mb-8 text-white drop-shadow-[8px_8px_0px_#000]">
+               DEALS!
              </h1>
-             <p className="text-lg md:text-xl font-black italic text-brand-text/70 uppercase tracking-tighter max-w-xl">
-               Best prices on games, hardware & gear — <span className="text-brand-lime">updated daily</span>
-             </p>
           </div>
           
-          <div className="bg-brand-secondary border border-brand-border p-8 flex flex-col items-center gap-4 relative group">
-             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-brand-red text-white text-[9px] font-black uppercase tracking-widest italic">
-                DAILY_RESET
+          <div className="bg-white border-4 border-black p-8 flex flex-col items-center gap-4 relative group shadow-comic rotate-2">
+             <div className="absolute -top-5 left-1/2 -translate-x-1/2 px-4 py-2 bg-brand-lime text-black border-2 border-black text-lg font-heading font-black uppercase tracking-widest italic">
+                DAILY_RESET!
              </div>
-             <div className="text-[10px] font-mono font-black text-brand-muted uppercase tracking-[0.2em] mb-2">DEALS_EXPIRE_IN</div>
+             <div className="text-xs font-heading font-black text-black uppercase tracking-widest mb-2">DEALS_EXPIRE_IN:</div>
              <Countdown />
-             <div className="mt-4 text-[8px] font-mono font-black text-brand-muted uppercase tracking-[0.1em]">PRECISION_MARKET_SYNC: 99.9%</div>
           </div>
         </div>
       </section>
@@ -202,59 +182,52 @@ export const DealsPage = ({ onNavigate }: { onNavigate: (page: string) => void }
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 py-12">
-        {/* DEAL OF THE DAY HERO CARD */}
-        <section className="mb-20">
-           <div className="bg-brand-card border-x border-t-4 border-b-4 border- brand-red shadow-neon-red relative group overflow-hidden">
+        {/* DEAL OF THE DAY HERO CARD */}        <section className="mb-20">
+           <div className="bg-white border-8 border-black shadow-comic relative group overflow-hidden">
+              <div className="absolute inset-0 halftone opacity-10 pointer-events-none"></div>
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                 <div className="aspect-video relative overflow-hidden bg-brand-bg">
+                 <div className="aspect-video relative overflow-hidden bg-zinc-100 border-b-4 lg:border-b-0 lg:border-r-4 border-black">
                     <img 
                       src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop" 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-110" 
                       alt="Pro Controller" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-bg via-transparent to-transparent"></div>
                     <div className="absolute top-6 left-6 flex gap-3">
-                       <Tag type="breaking">DEAL_OF_THE_DAY</Tag>
+                       <Tag type="breaking">DEAL_OF_THE_DAY!</Tag>
                        <PlatformBadge platform="PC" />
-                    </div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[2] opacity-5 pointer-events-none">
-                       <ShoppingCart size={100} className="text-white" />
                     </div>
                  </div>
 
-                 <div className="p-8 md:p-12 flex flex-col justify-center">
+                 <div className="p-8 md:p-12 flex flex-col justify-center bg-white">
                     <div className="flex items-center justify-between mb-8">
-                       <div className="flex items-center gap-2 px-3 py-1 bg-brand-red text-white text-[10px] font-black uppercase tracking-widest italic animate-bounce h-fit">
-                          75% OFF
+                       <div className="flex items-center gap-2 px-4 py-2 bg-brand-red text-white text-xl font-heading font-black uppercase tracking-widest italic border-2 border-black rotate-[-3deg] shadow-comic-sm">
+                          75% OFF!!
                        </div>
                        <div className="text-right">
-                          <div className="text-[10px] font-mono font-black text-brand-muted uppercase mb-1">SALE_ENDS_IN</div>
-                          <div className="text-xl font-black italic text-brand-red font-mono">04:12:10</div>
+                          <div className="text-xs font-heading font-black text-black uppercase mb-1">SALE_ENDS_IN:</div>
+                          <div className="text-3xl font-heading font-black italic text-brand-red drop-shadow-[2px_2px_0px_#000]">04:12:10</div>
                        </div>
                     </div>
                     
-                    <h2 className="text-4xl md:text-6xl font-black italic leading-[0.95] tracking-tighter uppercase mb-6">
-                       ELITE SERIES 2<br/><span className="text-brand-lime">CORE_CONTROLLER</span>
+                    <h2 className="text-5xl md:text-8xl font-heading font-black italic leading-[0.8] tracking-tighter uppercase mb-8 text-black drop-shadow-[4px_4px_0px_#2FAADF]">
+                       ELITE SERIES 2<br/><span className="text-brand-red">CORE_CONTROLLER</span>
                     </h2>
 
-                    <div className="flex items-baseline gap-4 mb-8 py-8 border-y border-white/5">
-                       <span className="text-5xl font-black italic tracking-tighter text-brand-lime">$49.99</span>
-                       <span className="text-xl text-brand-muted line-through font-black italic tracking-tighter opacity-50">$129.99</span>
-                       <span className="text-xs font-mono font-black text-brand-muted ml-auto uppercase">STORE_ID: MS_FT</span>
+                    <div className="flex items-baseline gap-4 mb-8 py-8 border-y-4 border-black">
+                       <span className="text-6xl font-heading font-black italic tracking-tighter text-black">$49.99</span>
+                       <span className="text-2xl text-black/40 line-through font-heading font-black italic tracking-tighter">$129.99</span>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center gap-4">
-                       <button className="w-full sm:flex-1 bg-brand-red text-white font-heading px-8 py-5 text-lg font-black italic flex items-center justify-center gap-3 hover:shadow-neon-red hover:scale-[1.02] active:scale-95 transition-all">
-                          GET DEAL NOW <ArrowRight size={20} />
-                       </button>
-                       <button className="w-full sm:w-auto px-8 py-5 border border-brand-border text-brand-muted hover:text-white hover:border-white transition-all text-sm font-black italic uppercase italic tracking-widest min-h-[44px]">
-                          VIEW_SPECS
+                    <div className="flex flex-col sm:flex-row items-center gap-6">
+                       <button className="comic-btn w-full sm:flex-1 bg-brand-red text-white py-6 text-2xl">
+                          GET DEAL NOW! <ArrowRight size={24} className="inline ml-2" />
                        </button>
                     </div>
                  </div>
               </div>
            </div>
         </section>
+
 
         {/* FILTER ROW */}
         <section className="mb-12 space-y-8 border-b border-brand-border pb-10">
